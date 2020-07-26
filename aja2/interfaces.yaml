@@ -21,10 +21,7 @@
       juniper_junos_rpc:
         rpcs:
           - get-interface-information
-        formats: text
-        kwargs:
-          terse: True
-          interface_name: ge-0/0/0
+        formats: xml
         provider:
           host: "{{ ansible_host }}"
           port: 22
@@ -32,6 +29,13 @@
           passwd: "{{ password }}"
       register: interfaces
 
-    - name: display interfaces 
+    - name: query interface information
+      xml: 
+        xmlstring: "{{ interfaces.stdout }}"
+        xpath: //logical-interface/address-family[address-family-name='inet']/interface-address/ifa-local
+        content: text
+      register: ip_addr
+
+    - name: show query results 
       debug: 
-        var: interfaces
+        var: ip_addr.matches
