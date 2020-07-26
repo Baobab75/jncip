@@ -1,5 +1,5 @@
 ---
-- name: Get device uptime
+- name: Get device  interfaces
   hosts:
     - all
   roles: 
@@ -11,22 +11,27 @@
     - name: username
       prompt: Junos Username
       private: no
+
     - name: password
       prompt: Junos Password
       private: no
 
   tasks:
-    - name: get uptame using galaxy module
-#     juniper_junos_command:
+    - name: get  interfaces information
       juniper_junos_rpc:
-        rpc:
-          - get-system-uptime-information
+        rpcs:
+          - get-interface-information
+        formats: text
+        kwargs:
+          terse: True
+          interface_name: ge-0/0/0
         provider:
           host: "{{ ansible_host }}"
           port: 22
           user: "{{ username }}" 
           passwd: "{{ password }}"
-      register: uptime
-    - name: display uptime (Ansible shortcut)
+      register: interfaces
+
+    - name: display interfaces 
       debug: 
-        var: uptime.parsed_output['system-uptime-information']
+        var: interfaces

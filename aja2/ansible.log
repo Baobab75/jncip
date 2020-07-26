@@ -1,0 +1,20 @@
+2020-07-20 20:24:35,031 p=4375 u=user n=ansible | PLAY [Get device uptime] ******************************************************************************************
+2020-07-20 20:24:35,123 p=4375 u=user n=ansible | TASK [get uptame using galaxy module] *****************************************************************************
+2020-07-20 20:24:44,660 p=4375 u=user n=ansible | [WARNING]: The value 22 (type int) in a string field was converted to '22' (type string). If this does not look
+like what you expect, quote the entire value to ensure it does not change.
+
+2020-07-20 20:24:44,660 p=4375 u=user n=ansible | ok: [master]
+2020-07-20 20:24:44,679 p=4375 u=user n=ansible | TASK [display uptime (Ansible shortcut)] **************************************************************************
+2020-07-20 20:24:44,909 p=4375 u=user n=ansible | ok: [master] => {
+    "uptime.stdout_lines": [
+        "",
+        "Current time: 2020-07-21 00:16:07 UTC",
+        "Time Source:  LOCAL CLOCK ",
+        "System booted: 2020-07-20 21:39:59 UTC (02:36:08 ago)",
+        "Protocols started: 2020-07-20 21:53:49 UTC (02:22:18 ago)",
+        "Last configured: 2020-06-28 21:08:04 UTC (3w1d 03:08 ago) by root",
+        "12:16AM  up 2:36, 0 users, load averages: 0.72, 0.85, 0.81"
+    ]
+}
+2020-07-20 20:24:44,918 p=4375 u=user n=ansible | PLAY RECAP ********************************************************************************************************
+2020-07-20 20:24:44,918 p=4375 u=user n=ansible | master                     : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

@@ -1,1 +1,2 @@
 master ansible_host=1.1.1.2
+#slave ansible_host=1.1.1.3
