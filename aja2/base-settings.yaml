@@ -12,12 +12,12 @@
     conf_file: "{{ tmp_dir }}/{{ inventory_hostname }}.conf"
     dns1: "8.8.8.8"
     dns2: "8.8.4.4"
+    connection_settings:
+      host: "{{ ansible_host }}"
+      port: "22"
+      timeout: 120
 
   tasks:
-    - debug: var=tmp_dir
-
-    - debug: var=conf_file
-
     - name: confirm or create configs directory
       file: 
         path: "{{ tmp_dir }}"
@@ -31,15 +31,15 @@
 
     - name: install generated configuration file
       juniper_junos_config:
-        provider:
-          host: "{{ ansible_host }}"
-          port: "22"
-          timeout: 120
+        provider: "{{ connection_settings }}"
         src: "{{ conf_file }}"
         load: merge 
         comment: "playbook base-settings.yaml"
+        confirmed: 5
         diff: yes
+        ignore_warning: yes
       register: config_results
+      notify: confirm previous commit
 
     - name: show configuration changes
       debug:
@@ -50,3 +50,11 @@
       file:
         path: "{{ conf_file }}"
         state: absent
+
+  handlers:
+    - name: confirm previous commit
+      juniper_junos_config: 
+        provider:  "{{ connection_settings }}"
+        comment: "playbook base-settings.yaml, confirming previous commit"
+        commit: yes
+        diff: no
