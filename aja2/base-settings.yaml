@@ -10,8 +10,6 @@
   vars:
     tmp_dir: "tmp"
     conf_file: "{{ tmp_dir }}/{{ inventory_hostname }}.conf"
-    dns1: "8.8.8.8"
-    dns2: "8.8.4.4"
     connection_settings:
       host: "{{ ansible_host }}"
       port: "22"
