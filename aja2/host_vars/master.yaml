@@ -1,3 +1,13 @@
 ---
 ansible_host: 1.1.1.2
 dns1: 8.8.4.4
+password: '"$6$fnyNsfdT$FOubRxxsR2k4y8lgayTm9XhvjGo8slx4daFfwxzNib.08rY7rxibkHOlif8Xyky3KjQLtlJtF9F/qYOv.uGQ/1"; ## SECRET-DATA'
+
+logical_systems:
+  PE1:
+    interfaces: ['ge-0/0/2.0','ge-0/0/3.0','lo.21']
+    uid: 2021
+  P1:
+    interfaces: ['ge-0/0/4.0','lt-0/0/0.12','lo0.31']
+    uid: 2031
+

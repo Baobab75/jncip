@@ -1,0 +1,21 @@
+#jinja2: lstrip_blocks: True
+system {
+    login {
+      {% for logical_system in logical_systems %}
+        class Admin{{ logical_system }} {
+            idle-timeout 1440;
+            logical-system {{ logical_system }};
+            permissions all;
+        }
+      {% endfor %}
+      {% for logical_system in logical_systems %}
+        user Admin{{ logical_system }} {
+            uid {{ logical_systems[logical_system]['uid'] }}
+            class Admin{{ logical_system }}
+            authentication {
+                encrypted-password {{ password }}
+            }
+        }
+      {% endfor %}
+    }
+}
